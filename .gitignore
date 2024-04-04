@@ -1,1 +1,22 @@
-node_modules
+# Node modules
+node_modules/
+
+# Build artifacts
+/build
+/dist
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+
+# Coverage reports
+/coverage
+
+# OS-specific files
+.DS_Store
+Thumbs.db
