@@ -1,13 +1,15 @@
-import { Button, DatePicker } from 'antd';
 import './App.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import CustomRoutes from './routes/CustomRoutes';
 
 function App() {
   return (
-    <div className='App'>
-      <h1> Employee Management System</h1>
-      <Button type='primary'>Primary Button</Button>
-      <DatePicker />
-    </div>
+    <Router>
+      <div className='App'>
+        <CustomRoutes />
+      </div>
+    </Router>
   );
 }
 
