@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Input from '../common/Input';
-import Button from '../common/Button';
+import CustomInput from '../common/Input';
+import CustomButton from '../common/Button';
 
-const SignUpForm = ({ onSignUp }) => {
+const SignupForm = ({ onSignup }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -13,46 +13,41 @@ const SignUpForm = ({ onSignUp }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Validate form data
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords don't match");
-      return;
-    }
-    // Call the onSignUp callback with the form data
-    onSignUp(formData);
+    // Call the onSignup callback with the form data
+    onSignup(formData);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input
+      <CustomInput
         type='email'
         name='email'
         placeholder='Email'
         value={formData.email}
         onChange={handleChange}
-        required
+        // required
       />
-      <Input
+      <CustomInput
         type='password'
         name='password'
         placeholder='Password'
         value={formData.password}
         onChange={handleChange}
-        required
+        // required
       />
-      <Input
+      <CustomInput
         type='password'
         name='confirmPassword'
         placeholder='Confirm Password'
         value={formData.confirmPassword}
         onChange={handleChange}
-        required
+        // required
       />
-      <Button type='submit'>Sign Up</Button>
+      <CustomButton type='submit'>Signup</CustomButton>
     </form>
   );
 };
 
-export default SignUpForm;
+export default SignupForm;

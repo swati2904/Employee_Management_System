@@ -1,12 +1,24 @@
 import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import LoginForm from '../components/auth/LoginForm';
-import Home from './Home';
-import { Link } from 'react-router-dom';
+import { loginUser } from '../config/backend'; // Import login API function
 
 const Login = () => {
-  const handleLogin = (formData) => {
-    // Implement login logic here
-    console.log('Login:', formData);
+  const navigate = useNavigate();
+
+  const handleLogin = async (formData) => {
+    try {
+      const data = await loginUser(formData);
+      console.log(data); // Log response from backend
+      if (data && data.success) {
+        navigate('/dashboard');
+      } else {
+        // Handle login error
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+      // Handle login error
+    }
   };
 
   return (

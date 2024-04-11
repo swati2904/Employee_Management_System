@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Input from '../common/Input';
-import Button from '../common/Button';
+import CustomInput from '../common/Input';
+import CustomButton from '../common/Button';
 
 const LoginForm = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -12,7 +12,7 @@ const LoginForm = ({ onLogin }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Call the onLogin callback with the form data
     onLogin(formData);
@@ -20,7 +20,7 @@ const LoginForm = ({ onLogin }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input
+      <CustomInput
         type='email'
         name='email'
         placeholder='Email'
@@ -28,7 +28,7 @@ const LoginForm = ({ onLogin }) => {
         onChange={handleChange}
         required
       />
-      <Input
+      <CustomInput
         type='password'
         name='password'
         placeholder='Password'
@@ -36,7 +36,7 @@ const LoginForm = ({ onLogin }) => {
         onChange={handleChange}
         required
       />
-      <Button type='submit'>Login</Button>
+      <CustomButton type='submit'>Login</CustomButton>
     </form>
   );
 };
