@@ -1,46 +1,57 @@
 const express = require('express');
 const con = require('../utils/db.js');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
 router.post('/employee_login', (req, res) => {
-  const sql = 'SELECT * from employee Where email = ?';
-  con.query(sql, [req.body.email], (err, result) => {
-    if (err) return res.json({ loginStatus: false, Error: 'Query error' });
-    if (result.length > 0) {
-      bcrypt.compare(req.body.password, result[0].password, (err, response) => {
-        if (err)
-          return res.json({ loginStatus: false, Error: 'Wrong Password' });
-        if (response) {
-          const email = result[0].email;
-          const token = jwt.sign(
-            { role: 'employee', email: email, id: result[0].id },
-            'jwt_secret_key',
-            { expiresIn: '1d' }
-          );
-          res.cookie('token', token);
-          return res.json({ loginStatus: true, id: result[0].id });
-        }
-      });
-    } else {
-      return res.json({ loginStatus: false, Error: 'wrong email or password' });
+  const { email, password } = req.body;
+  const sql = 'SELECT * FROM employee WHERE email = ?';
+  console.log('sql ', sql);
+
+  con.query(sql, [email], (err, result) => {
+    if (err) {
+      console.error('Error executing SQL query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
     }
+    if (result.length === 0) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+    const user = result[0];
+    bcrypt.compare(password, user.password, (err, response) => {
+      if (err) {
+        console.error('Error comparing passwords:', err);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+      if (!response) {
+        return res.status(401).json({ error: 'Invalid email or password' });
+      }
+
+      // Return success response with user ID
+      return res.json({ loginStatus: true, id: user.id });
+    });
   });
 });
 
 router.get('/detail/:id', (req, res) => {
   const id = req.params.id;
-  const sql = 'SELECT * FROM employee where id = ?';
+  const sql = 'SELECT * FROM employee WHERE id = ?';
+
+  // Retrieve employee details based on the provided ID
   con.query(sql, [id], (err, result) => {
-    if (err) return res.json({ Status: false });
+    if (err) {
+      console.error('Error executing SQL query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+
+    // Return the result as JSON
     return res.json(result);
   });
 });
 
 router.get('/logout', (req, res) => {
-  res.clearCookie('token');
+  // Here, you can implement any logout logic you need
   return res.json({ Status: true });
 });
 

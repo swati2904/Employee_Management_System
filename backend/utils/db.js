@@ -9,12 +9,4 @@ const pool = mysql.createPool({
   database: 'EmployeeManagementSystem',
 });
 
-pool.getConnection(function (err, connection) {
-  if (err) {
-    console.log('connection error');
-  } else {
-    console.log('Connected');
-    // Exporting pool after connection is established
-    module.exports = pool;
-  }
-});
+module.exports = pool;

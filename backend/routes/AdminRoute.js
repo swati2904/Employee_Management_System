@@ -1,6 +1,5 @@
 const express = require('express');
 const con = require('../utils/db.js');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
@@ -13,12 +12,7 @@ router.post('/adminlogin', (req, res) => {
     if (err) return res.json({ loginStatus: false, Error: 'Query error' });
     if (result.length > 0) {
       const email = result[0].email;
-      const token = jwt.sign(
-        { role: 'admin', email: email, id: result[0].id },
-        'jwt_secret_key',
-        { expiresIn: '1d' }
-      );
-      res.cookie('token', token);
+      // You may choose to implement authentication logic here if needed
       return res.json({ loginStatus: true });
     } else {
       return res.json({ loginStatus: false, Error: 'wrong email or password' });
@@ -57,7 +51,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
 });
-// end imag eupload
+// end image upload
 
 router.post('/add_employee', upload.single('image'), (req, res) => {
   const sql = `INSERT INTO employee 
