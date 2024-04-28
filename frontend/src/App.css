@@ -1,28 +1,16 @@
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+:root {
+  --primary-color: #95d2ed;
+  --secondary-color: #333; 
+  --text-color: #ffffff;
+  --button-color-primary: #95d2ed;
+  --button-color-secondary: rgb(47, 151, 196);
+
+}
+
+.App{
   height: 100vh;
 }
 
-.form-container {
-  width: 500px; 
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
 
-.form-container form {
-  display: flex;
-  flex-direction: column;
-}
 
-.form-container form > * {
-  margin-bottom: 10px;
-}
 
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
