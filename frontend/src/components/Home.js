@@ -1,101 +1,110 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import './style.css'; // Import the external CSS file
+import { Card, Button, Table } from 'antd';
+import './style.css';
 
 const Home = () => {
   const [adminTotal, setAdminTotal] = useState(0);
-  const [employeeTotal, setemployeeTotal] = useState(0);
+  const [employeeTotal, setEmployeeTotal] = useState(0);
   const [salaryTotal, setSalaryTotal] = useState(0);
   const [admins, setAdmins] = useState([]);
 
   useEffect(() => {
-    adminCount();
-    employeeCount();
-    salaryCount();
-    AdminRecords();
+    fetchData();
   }, []);
 
-  const AdminRecords = () => {
-    axios.get('http://localhost:3001/auth/admin_records').then((result) => {
-      if (result.data.Status) {
-        setAdmins(result.data.Result);
-      } else {
-        alert(result.data.Error);
-      }
-    });
+  const fetchData = () => {
+    axios
+      .all([
+        axios.get('http://localhost:3001/auth/admin_count'),
+        axios.get('http://localhost:3001/auth/employee_count'),
+        axios.get('http://localhost:3001/auth/salary_count'),
+        axios.get('http://localhost:3001/auth/admin_records'),
+      ])
+      .then(
+        axios.spread(
+          (
+            adminCountRes,
+            employeeCountRes,
+            salaryCountRes,
+            adminRecordsRes
+          ) => {
+            if (adminCountRes.data.Status) {
+              setAdminTotal(adminCountRes.data.Result[0].admin);
+            }
+            if (employeeCountRes.data.Status) {
+              setEmployeeTotal(employeeCountRes.data.Result[0].employee);
+            }
+            if (salaryCountRes.data.Status) {
+              setSalaryTotal(salaryCountRes.data.Result[0].salaryOFEmp);
+            }
+            if (adminRecordsRes.data.Status) {
+              setAdmins(adminRecordsRes.data.Result);
+            } else {
+              alert(adminRecordsRes.data.Error);
+            }
+          }
+        )
+      )
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
   };
-  const adminCount = () => {
-    axios.get('http://localhost:3001/auth/admin_count').then((result) => {
-      if (result.data.Status) {
-        setAdminTotal(result.data.Result[0].admin);
-      }
-    });
-  };
-  const employeeCount = () => {
-    axios.get('http://localhost:3001/auth/employee_count').then((result) => {
-      if (result.data.Status) {
-        setemployeeTotal(result.data.Result[0].employee);
-      }
-    });
-  };
-  const salaryCount = () => {
-    axios.get('http://localhost:3001/auth/salary_count').then((result) => {
-      if (result.data.Status) {
-        setSalaryTotal(result.data.Result[0].salaryOFEmp);
-      } else {
-        alert(result.data.Error);
-      }
-    });
-  };
+
+  const columns = [
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      key: 'action',
+      render: (_, record) => (
+        <>
+          <Button size='large' className='primaryBtn'>
+            Edit
+          </Button>
+          <Button size='large' className='secondaryBtn'>
+            Delete
+          </Button>
+        </>
+      ),
+    },
+  ];
+
   return (
     <div className='homeContainer'>
       <div className='homeStatsContainer'>
-        <div className='homeStat'>
-          <h4>Admin</h4>
+        <Card className='homeStatCard'>
+          <h2>Admin</h2>
           <hr />
           <div className='homeStatDetail'>
             <span>Total:</span>
             <span>{adminTotal}</span>
           </div>
-        </div>
-        <div className='homeStat'>
-          <h4>Employee</h4>
+        </Card>
+        <Card className='homeStatCard'>
+          <h2>Employee</h2>
           <hr />
           <div className='homeStatDetail'>
             <span>Total:</span>
             <span>{employeeTotal}</span>
           </div>
-        </div>
-        <div className='homeStat'>
-          <h4>Salary</h4>
+        </Card>
+        <Card className='homeStatCard'>
+          <h2>Salary</h2>
           <hr />
           <div className='homeStatDetail'>
             <span>Total:</span>
             <span>${salaryTotal}</span>
           </div>
-        </div>
+        </Card>
       </div>
       <div className='homeAdminList'>
         <h3>List of Admins</h3>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {admins.map((a, index) => (
-              <tr key={index}>
-                <td>{a.email}</td>
-                <td>
-                  <button className='btn btn-info btn-sm me-2'>Edit</button>
-                  <button className='btn btn-warning btn-sm'>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Table dataSource={admins} columns={columns} pagination={false} />
       </div>
     </div>
   );

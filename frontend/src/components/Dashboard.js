@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './style.css'; // Import the external CSS file
+import './style.css';
+import {
+  DashboardOutlined,
+  UserAddOutlined,
+  UnorderedListOutlined,
+  LogoutOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -19,37 +26,44 @@ const Dashboard = () => {
   return (
     <div className='dashboardContainer'>
       <div className='sidebar'>
-        <Link to='/dashboard' className='logo'>
-          <span className='logoText'></span>
-        </Link>
+        <Link to='/dashboard' className='logo'></Link>
         <ul className='sidebarMenu'>
           <li>
             <Link to='/dashboard'>
-              <i className='bi-speedometer2'></i>
+              <DashboardOutlined
+                style={{ fontSize: '16px', marginRight: '10px' }}
+              />
+
               <span>Dashboard</span>
             </Link>
           </li>
           <li>
             <Link to='/dashboard/employee'>
-              <i className='bi-people'></i>
+              <UserAddOutlined
+                style={{ fontSize: '16px', marginRight: '10px' }}
+              />
               <span>Manage Employees</span>
             </Link>
           </li>
           <li>
             <Link to='/dashboard/category'>
-              <i className='bi-columns'></i>
+              <UnorderedListOutlined
+                style={{ fontSize: '16px', marginRight: '10px' }}
+              />{' '}
               <span>Category</span>
             </Link>
           </li>
           <li>
             <Link to='/dashboard/profile'>
-              <i className='bi-person'></i>
+              <UserOutlined style={{ fontSize: '16px', marginRight: '10px' }} />{' '}
               <span>Profile</span>
             </Link>
           </li>
           <li onClick={handleLogout}>
             <Link>
-              <i className='bi-power'></i>
+              <LogoutOutlined
+                style={{ fontSize: '16px', marginRight: '10px' }}
+              />{' '}
               <span>Logout</span>
             </Link>
           </li>
@@ -57,7 +71,7 @@ const Dashboard = () => {
       </div>
       <div className='content'>
         <div className='header'>
-          <h4>Employee Management System</h4>
+          <h2>Employee Management System</h2>
         </div>
         <div className='mainContent'>
           <Outlet />
