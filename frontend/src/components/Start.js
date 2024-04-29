@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Col, Row } from 'antd';
+import { motion } from 'framer-motion';
 import './style.css';
-import homePage from '../assets/homePage.jpg';
+import { ReactComponent as TextSVG } from '../assets/homePage.svg';
 
 const Start = () => {
   const navigate = useNavigate();
@@ -27,13 +28,28 @@ const Start = () => {
       <Col span={12}>
         <div className='transparentImgContainer'>
           <div className='imgContainer'>
-            <img src={homePage} alt='' className='homePageImg' />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 0.8, scale: 0.7 }}
+              transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+            >
+              <TextSVG />
+            </motion.div>
+
+            {/* <img src={homePage} alt='' className='homePageImg' /> */}
           </div>
         </div>
       </Col>
       <Col span={12}>
         <div className='hero-text'>
-          <h1>Welcome to the Employee Management System</h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 5 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className='animated-text'
+          >
+            Welcome to the Employee Management System{' '}
+          </motion.h1>
         </div>
         <div className='subtext'>
           <p>

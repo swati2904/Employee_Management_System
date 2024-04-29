@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import './style.css'; // Import the external CSS file
 
 const Home = () => {
   const [adminTotal, setAdminTotal] = useState(0);
@@ -47,40 +48,34 @@ const Home = () => {
     });
   };
   return (
-    <div>
-      <div className='p-3 d-flex justify-content-around mt-3'>
-        <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
-          <div className='text-center pb-1'>
-            <h4>Admin</h4>
-          </div>
+    <div className='homeContainer'>
+      <div className='homeStatsContainer'>
+        <div className='homeStat'>
+          <h4>Admin</h4>
           <hr />
-          <div className='d-flex justify-content-between'>
-            <h5>Total:</h5>
-            <h5>{adminTotal}</h5>
+          <div className='homeStatDetail'>
+            <span>Total:</span>
+            <span>{adminTotal}</span>
           </div>
         </div>
-        <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
-          <div className='text-center pb-1'>
-            <h4>Employee</h4>
-          </div>
+        <div className='homeStat'>
+          <h4>Employee</h4>
           <hr />
-          <div className='d-flex justify-content-between'>
-            <h5>Total:</h5>
-            <h5>{employeeTotal}</h5>
+          <div className='homeStatDetail'>
+            <span>Total:</span>
+            <span>{employeeTotal}</span>
           </div>
         </div>
-        <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
-          <div className='text-center pb-1'>
-            <h4>Salary</h4>
-          </div>
+        <div className='homeStat'>
+          <h4>Salary</h4>
           <hr />
-          <div className='d-flex justify-content-between'>
-            <h5>Total:</h5>
-            <h5>${salaryTotal}</h5>
+          <div className='homeStatDetail'>
+            <span>Total:</span>
+            <span>${salaryTotal}</span>
           </div>
         </div>
       </div>
-      <div className='mt-4 px-5 pt-3'>
+      <div className='homeAdminList'>
         <h3>List of Admins</h3>
         <table className='table'>
           <thead>
@@ -90,8 +85,8 @@ const Home = () => {
             </tr>
           </thead>
           <tbody>
-            {admins.map((a) => (
-              <tr>
+            {admins.map((a, index) => (
+              <tr key={index}>
                 <td>{a.email}</td>
                 <td>
                   <button className='btn btn-info btn-sm me-2'>Edit</button>

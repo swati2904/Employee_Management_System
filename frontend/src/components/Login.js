@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './style.css';
+import './style.css'; // Import the external CSS file
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,9 @@ const Login = () => {
   });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
   axios.defaults.withCredentials = true;
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -27,9 +29,13 @@ const Login = () => {
   };
 
   return (
-    <div className='d-flex justify-content-center align-items-center vh-100 loginPage'>
-      <div className='p-3 rounded w-25 border loginForm'>
-        <div className='text-warning'>{error && error}</div>
+    <div className='loginPage'>
+      {' '}
+      {/* Remove inline class */}
+      <div className='loginForm'>
+        {' '}
+        {/* Remove inline class */}
+        {error && <div className='errorMsg'>{error}</div>}
         <h2>Login Page</h2>
         <form onSubmit={handleSubmit}>
           <div className='mb-3'>
@@ -41,6 +47,7 @@ const Login = () => {
               name='email'
               autoComplete='off'
               placeholder='Enter Email'
+              value={values.email}
               onChange={(e) => setValues({ ...values, email: e.target.value })}
               className='form-control rounded-0'
             />
@@ -53,6 +60,7 @@ const Login = () => {
               type='password'
               name='password'
               placeholder='Enter Password'
+              value={values.password}
               onChange={(e) =>
                 setValues({ ...values, password: e.target.value })
               }
