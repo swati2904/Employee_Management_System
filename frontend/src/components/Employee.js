@@ -6,14 +6,18 @@ import './style.css';
 
 const Employee = () => {
   const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get('http://localhost:3001/auth/employee')
       .then((result) => {
         if (result.data.Status) {
           setEmployees(result.data.Result);
+          setLoading(false);
         } else {
           alert(result.data.Error);
         }
@@ -97,7 +101,13 @@ const Employee = () => {
         </Link>
       </div>
       <div className='employeeTable'>
-        <Table columns={columns} dataSource={employees} pagination={false} />
+        <Table
+          columns={columns}
+          dataSource={employees}
+          pagination={{ pageSize: 8 }}
+          loading={loading}
+          scroll={{ y: 370 }}
+        />
       </div>
     </div>
   );

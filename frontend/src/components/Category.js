@@ -38,7 +38,7 @@ const Category = () => {
           <Link to='/dashboard/add_category'>Add Category</Link>
         </Button>
         <div className='categoryTable'>
-          <Table dataSource={category} columns={columns} pagination={false} />
+          <Table dataSource={category} columns={columns} pagination={true} />
         </div>
       </div>
     </div>
