@@ -307,142 +307,143 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 
 /* category */
 
-/* style.css */
-
-.addCategoryContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.formContainer {
-  background-color: #ffffff;
-  padding: 20px;
-  border: 1px solid #cccccc;
-  border-radius: 8px;
-  width: 300px;
-}
-
-.formGroup {
-  margin-bottom: 20px;
-}
-
-.formGroup label {
-  display: block;
-  font-weight: bold;
-}
-
-.formControl {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-}
-
-.submitButton {
-  width: 100%;
-  padding: 10px;
-  background-color: #28a745;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.submitButton:hover {
-  background-color: #218838;
-}
-
-/* add employee */
-/* style.css */
-
-.addEmployeeContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.formContainer {
-  width: 400px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.formGroup {
-  margin-bottom: 20px;
-}
-
-.formGroup label {
-  display: block;
-  font-weight: bold;
-}
-
-.formControl {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.submitButton {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.submitButton:hover {
-  background-color: #0056b3;
-}
-
-/* category */
 /* style.css */
 
 .categoryContainer {
-  padding: 20px;
+  padding: 10px;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .headingContainer {
-  display: flex;
-  justify-content: center;
-}
-
-.addCategoryButton {
-  display: block;
-  margin-top: 20px;
+  text-align: center;
   margin-bottom: 20px;
-  background-color: #28a745;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  text-decoration: none;
 }
 
-.addCategoryButton:hover {
-  background-color: #218838;
+.categoryCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
 }
 
-.categoryTable {
-  max-width: 800px;
-  margin: 0 auto;
+
+
+.categoryCard {
+  width: 250px;
+  margin: 10px;
 }
+
+.employeeList {
+  display: flex;
+  flex-direction: column;
+}
+
+.employeeItem {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.employeeImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.employeeDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.employeeName {
+  font-weight: bold;
+  /* border: 2px solid lightblue; */
+  background: rgb(216, 245, 255);
+  padding: 5px;
+}
+
+.employeeCategory {
+  font-style: italic;
+  color: #888;
+}
+
+
+/* style.css */
+
+/* Add Employee form */
+.addEmployeeContainer {
+  max-height: 500px; 
+  overflow-y: auto; 
+}
+
+/* Form container */
+.formContainer {
+  background-color: #f9f9f9; 
+  border: 1px solid #ddd; 
+  border-radius: 8px; 
+  padding: 20px; 
+}
+
+/* Form title */
+.formContainer h3 {
+  text-align: center; 
+  color: #333; 
+}
+
+/* Form groups */
+.formGroup {
+  margin-bottom: 20px; 
+}
+
+/* Form labels */
+.formGroup label {
+  display: block; 
+  font-weight: bold; 
+  margin-bottom: 5px; 
+  color: #333; 
+}
+
+/* Form inputs */
+.formControl {
+  width: 100%; 
+  padding: 10px; 
+  border: 1px solid #ddd; 
+  border-radius: 4px; 
+  box-sizing: border-box; 
+}
+
+/* Select dropdown */
+.formControl select {
+  width: 100%;
+  padding: 10px; 
+  border: 1px solid #ddd; 
+  border-radius: 4px; 
+  box-sizing: border-box; 
+}
+
+/* Submit button */
+.submitButton {
+  width: 100%; 
+  padding: 10px;
+  background-color: #007bff; 
+  color: #fff; 
+  border: none; 
+  border-radius: 4px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+}
+
+.submitButton:hover {
+  background-color: #0056b3; 
+}
+
 
 
 /* edit employee */
