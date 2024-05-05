@@ -14,6 +14,12 @@ import Start from '../components/Start';
 import EmployeeLogin from '../components/EmployeeLogin';
 import EmployeeDetail from '../components/EmployeeDetail';
 import PrivateRoute from '../components/PrivateRoute';
+import EmployeeDashboard from '../components/EmployeeDashboard';
+import EmployeeLeaveRequestRecord from '../components/EmployeeLeaveRequestRecord';
+import EmployeeShift from '../components/EmployeeShift';
+import EmployeeHolidayDetails from '../components/EmployeeHolidayDetails';
+import EmployeeTaskDetails from '../components/EmployeeTaskDetails';
+
 const CustomRoutes = () => {
   return (
     <Routes>
@@ -32,13 +38,42 @@ const CustomRoutes = () => {
         <Route path='' element={<Home />}></Route>
         <Route path='/dashboard/employee' element={<Employee />}></Route>
         <Route path='/dashboard/category' element={<Category />}></Route>
-        <Route path='/dashboard/profile' element={<Profile />}></Route>
+        {/* <Route path='/dashboard/profile' element={<Profile />}></Route> */}
         <Route path='/dashboard/add_category' element={<AddCategory />}></Route>
         <Route path='/dashboard/add_employee' element={<AddEmployee />}></Route>
         <Route
           path='/dashboard/edit_employee/:id'
           element={<EditEmployee />}
         ></Route>
+      </Route>
+
+      {/* employee dashboard */}
+      <Route
+        path='/employeedashboard'
+        element={
+          <PrivateRoute>
+            <EmployeeDashboard />
+          </PrivateRoute>
+        }
+      >
+        <Route path='' element={<Profile />}></Route>
+        <Route
+          path='/employeedashboard/leave-requests'
+          element={<EmployeeLeaveRequestRecord />}
+        ></Route>
+        <Route
+          path='/employeedashboard/shifts'
+          element={<EmployeeShift />}
+        ></Route>
+        <Route
+          path='/employeedashboard/holidays'
+          element={<EmployeeHolidayDetails />}
+        ></Route>
+        <Route
+          path='/employeedashboard/tasks'
+          element={<EmployeeTaskDetails />}
+        ></Route>
+        {/* <Route path='/employeedashboard/profile' element={<Profile />}></Route> */}
       </Route>
     </Routes>
   );

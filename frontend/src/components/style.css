@@ -672,3 +672,205 @@ select {
 .logoutBtn {
   margin-top: 20px;
 }
+
+
+/* Leave request */
+.leave-request-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.leave-request-container h2 {
+  margin-bottom: 20px;
+}
+
+.leave-request-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.leave-request-container .form-group {
+  margin-bottom: 15px;
+}
+
+.leave-request-container label {
+  font-weight: bold;
+}
+
+.leave-request-container input[type="text"],
+.leave-request-container input[type="date"],
+.leave-request-container textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.leave-request-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.leave-request-container button:hover {
+  background-color: #0056b3;
+}
+
+
+/* task */
+
+.task-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.task-container h2 {
+  margin-bottom: 20px;
+}
+
+.task-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-container .form-group {
+  margin-bottom: 15px;
+}
+
+.task-container label {
+  font-weight: bold;
+}
+
+.task-container input[type="text"],
+.task-container input[type="date"],
+.task-container textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.task-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.task-container button:hover {
+  background-color: #0056b3;
+}
+
+
+/* holidays */
+.holidays-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.holidays-container h2 {
+  margin-bottom: 20px;
+}
+
+.holidays-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.holidays-container .form-group {
+  margin-bottom: 15px;
+}
+
+.holidays-container label {
+  font-weight: bold;
+}
+
+.holidays-container input[type="date"],
+.holidays-container textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.holidays-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.holidays-container button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Shift */
+.shift-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.shift-container h2 {
+  margin-bottom: 20px;
+}
+
+.shift-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.shift-container .form-group {
+  margin-bottom: 15px;
+}
+
+.shift-container label {
+  font-weight: bold;
+}
+
+.shift-container input[type="datetime-local"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.shift-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.shift-container button:hover {
+  background-color: #0056b3;
+}

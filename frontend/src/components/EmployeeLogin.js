@@ -23,7 +23,7 @@ const EmployeeLogin = () => {
       .then((result) => {
         if (result.data.loginStatus) {
           localStorage.setItem('valid', true);
-          navigate('/employee_detail/' + result.data.id);
+          navigate('/employeedashboard');
         } else {
           setError(result.data.error);
         }

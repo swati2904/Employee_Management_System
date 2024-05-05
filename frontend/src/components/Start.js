@@ -16,7 +16,7 @@ const Start = () => {
           if (result.data.role === 'admin') {
             navigate('/dashboard');
           } else {
-            navigate('/employee_detail/' + result.data.id);
+            navigate('/employeedashboard');
           }
         }
       })
