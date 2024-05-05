@@ -6,10 +6,9 @@ const router = express.Router();
 
 router.post('/employee_login', (req, res) => {
   const { email, password } = req.body;
-  const sql = 'SELECT * FROM employee WHERE email = ?';
-  console.log('sql ', sql);
+  const sql = 'SELECT * FROM employee WHERE email = ? AND password = ?';
 
-  con.query(sql, [email], (err, result) => {
+  con.query(sql, [email, password], (err, result) => {
     if (err) {
       console.error('Error executing SQL query:', err);
       return res.status(500).json({ error: 'Internal server error' });
@@ -18,19 +17,8 @@ router.post('/employee_login', (req, res) => {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    const user = result[0];
-    bcrypt.compare(password, user.password, (err, response) => {
-      if (err) {
-        console.error('Error comparing passwords:', err);
-        return res.status(500).json({ error: 'Internal server error' });
-      }
-      if (!response) {
-        return res.status(401).json({ error: 'Invalid email or password' });
-      }
-
-      // Return success response with user ID
-      return res.json({ loginStatus: true, id: user.id });
-    });
+    // Return success response with user ID
+    return res.json({ loginStatus: true, id: result[0].id });
   });
 });
 

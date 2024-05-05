@@ -50,10 +50,13 @@ const EmployeeDetail = () => {
           />
         </div>
         <div className='employeeInfo'>
-          <h3>Name: {employee.name}</h3>
-          <h3>Email: {employee.email}</h3>
-          <h3>Salary: ${employee.salary}</h3>
-          <Button type='danger' onClick={handleLogout}>
+          <h3 className='detailTitle'>Name:</h3>
+          <p className='detailText'>{employee.name}</p>
+          <h3 className='detailTitle'>Email:</h3>
+          <p className='detailText'>{employee.email}</p>
+          <h3 className='detailTitle'>Salary:</h3>
+          <p className='detailText'>${employee.salary}</p>
+          <Button type='danger' onClick={handleLogout} className='logoutBtn'>
             Logout
           </Button>
         </div>

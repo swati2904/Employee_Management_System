@@ -624,3 +624,51 @@ select {
 .checkbox {
   margin-right: 5px;
 }
+
+/* employee details */
+.employeeDetailContainer {
+  width: 80%;
+  margin: auto;
+}
+
+.employeeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.employeeDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.employeeImageContainer {
+  flex: 1;
+}
+
+.employeeImage {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.employeeInfo {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.detailTitle {
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.detailText {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.logoutBtn {
+  margin-top: 20px;
+}
