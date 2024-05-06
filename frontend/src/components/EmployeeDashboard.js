@@ -50,7 +50,7 @@ const EmployeeDashboard = () => {
               <FieldTimeOutlined
                 style={{ fontSize: '16px', marginRight: '10px' }}
               />
-              <span>Shifts</span>
+              <span>Add Shifts</span>
             </Link>
           </li>
           <li>
@@ -61,14 +61,14 @@ const EmployeeDashboard = () => {
               <span>Holidays</span>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link to='/employeedashboard/tasks'>
               <WechatWorkOutlined
                 style={{ fontSize: '16px', marginRight: '10px' }}
               />
-              <span>Tasks</span>
+              <span>Add Tasks</span>
             </Link>
-          </li>
+          </li> */}
           <li onClick={handleLogout}>
             <Link>
               <LogoutOutlined

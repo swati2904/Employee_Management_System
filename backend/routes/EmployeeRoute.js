@@ -36,10 +36,69 @@ router.get('/employees', (req, res) => {
 
 // Employee Detail API
 router.get('/detail/:id', (req, res) => {
-  const id = req.params.id;
-  const sql = 'SELECT * FROM employee WHERE id = ?';
+  const loggedInUserId = req.params.id;
+  const isAdmin = req.user && req.user.isAdmin; // Assuming isAdmin is a property indicating admin status
 
-  con.query(sql, [id], (err, result) => {
+  let sql;
+  let params;
+
+  if (isAdmin) {
+    // If the logged-in user is an admin, fetch details for the specified employee ID
+    sql = `
+      SELECT 
+        e.id AS employee_id,
+        e.name AS employee_name,
+        e.email AS employee_email,
+        e.address AS employee_address,
+        e.salary AS employee_salary,
+        e.image AS employee_image,
+        t.title AS task_title,
+        t.description AS task_description,
+        t.due_date AS task_due_date,
+        s.shift_start,
+        s.shift_end,
+        l.start_date AS leave_start_date,
+        l.end_date AS leave_end_date,
+        l.reason AS leave_reason
+      FROM 
+        employee e
+        LEFT JOIN tasks t ON e.id = t.assigned_to
+        LEFT JOIN department_shifts s ON e.id = s.employee_id
+        LEFT JOIN leave_requests l ON e.id = l.employee_id
+      WHERE 
+        e.id = ?
+    `;
+    params = [loggedInUserId];
+  } else {
+    // If the logged-in user is an employee, fetch details only for the logged-in employee
+    sql = `
+      SELECT 
+        e.id AS employee_id,
+        e.name AS employee_name,
+        e.email AS employee_email,
+        e.address AS employee_address,
+        e.salary AS employee_salary,
+        e.image AS employee_image,
+        t.title AS task_title,
+        t.description AS task_description,
+        t.due_date AS task_due_date,
+        s.shift_start,
+        s.shift_end,
+        l.start_date AS leave_start_date,
+        l.end_date AS leave_end_date,
+        l.reason AS leave_reason
+      FROM 
+        employee e
+        LEFT JOIN tasks t ON e.id = t.assigned_to
+        LEFT JOIN department_shifts s ON e.id = s.employee_id
+        LEFT JOIN leave_requests l ON e.id = l.employee_id
+      WHERE 
+        e.email = ?
+    `;
+    params = [loggedInUserId];
+  }
+
+  con.query(sql, params, (err, result) => {
     if (err) {
       console.error('Error executing SQL query:', err);
       return res.status(500).json({ error: 'Internal server error' });

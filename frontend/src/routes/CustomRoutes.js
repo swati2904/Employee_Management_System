@@ -6,7 +6,7 @@ import Dashboard from '../components/Dashboard';
 import Home from '../components/Home';
 import Employee from '../components/Employee';
 import Category from '../components/Category';
-import Profile from '../components/viewEmployeeShift';
+import EmployeeProfile from '../components/EmployeeProfile';
 import AddCategory from '../components/AddCategory';
 import AddEmployee from '../components/AddEmployee';
 import EditEmployee from '../components/EditEmployee';
@@ -77,6 +77,7 @@ const CustomRoutes = () => {
           </PrivateRoute>
         }
       >
+        <Route path='' element={<EmployeeTaskDetails />}></Route>
         <Route
           path='/employeedashboard/leave-requests'
           element={<EmployeeLeaveRequestRecord />}
@@ -89,11 +90,10 @@ const CustomRoutes = () => {
           path='/employeedashboard/shifts'
           element={<EmployeeShift />}
         ></Route>
-        <Route
+        {/* <Route
           path='/employeedashboard/tasks'
           element={<EmployeeTaskDetails />}
-        ></Route>
-        {/* <Route path='/employeedashboard/profile' element={<Profile />}></Route> */}
+        ></Route> */}
       </Route>
     </Routes>
   );

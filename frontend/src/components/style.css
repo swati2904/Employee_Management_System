@@ -184,19 +184,24 @@
   width: 30%;
   height: 150px;
   margin-bottom: 20px;
-  background-color: #a4def7;
+  background-color: #e4eaed; /* Light blue color */
   border-radius: 20px;
+  box-shadow: 
+      0 8px 16px rgba(26, 183, 236, 0.3), /* Blue shadow */
+      0 0 0 10px white; /* Inner glow */
 }
 
 .homeStatDetail {
   font-size: 15px;
   font-weight: bold;
   margin-top: 10px;
-  color: white;
+  color: #d23d3d;
 }
 
 .homeAdminList {
   margin-top: 20px;
+  height: 300px;
+  overflow-y: auto;
 }
 
 .table {
@@ -207,8 +212,8 @@
   margin: 5px;
   border-radius: 10px;
   font-weight: bold;
-  border: 2px solid rgb(85, 204, 225);
-  color: rgb(85, 204, 225);
+  border: 2px solid #28a745;
+  color: #28a745;
 }
 
 .primaryBtn:hover{
@@ -289,17 +294,20 @@
   padding: 20px;
 }
 
+
 .header {
-  background-color: #c2e0f8;
-  padding: 15px 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
+  background-color: #3498db80; 
+  color: white;
+  padding: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
-.header h2{
-  color: rgb(19, 19, 19);
-  font-weight: bold;
-  
+.header h1 {
+  margin: 0;
+  font-size: 28px;
 }
 
 .mainContent {
@@ -784,6 +792,7 @@ select {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  height: 550px;
 }
 
 .holidays-container h2 {
@@ -814,7 +823,7 @@ select {
 }
 
 .holidays-container button {
-  background-color: #007bff;
+  background-color: #1e8538;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -823,7 +832,7 @@ select {
 }
 
 .holidays-container button:hover {
-  background-color: #0056b3;
+  background-color: #28a745;;
 }
 
 
@@ -865,7 +874,7 @@ select {
 }
 
 .shift-container button {
-  background-color: #007bff;
+  background-color: #28a745;;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -874,7 +883,7 @@ select {
 }
 
 .shift-container button:hover {
-  background-color: #0056b3;
+  background-color: #28a745;;
 }
 
 
@@ -908,7 +917,7 @@ select {
 /* View holidays */
 .holiday-list-container {
   padding: 20px;
-  height: 550px; /* Adjust the height as needed */
+  height: 600; /* Adjust the height as needed */
   overflow-y: auto;
 }
 
@@ -942,6 +951,8 @@ select {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
+  height: 500px;
+  overflow-y: auto;
 }
 
 .task-card {
@@ -958,6 +969,7 @@ select {
 .task-card h2 {
   font-size: 18px;
   margin-bottom: 10px;
+  color: #66b8db;
 }
 
 .task-card p {
@@ -1029,4 +1041,37 @@ select {
 
 .formatted-date {
   color: #666;
+}
+
+/* single employee  */
+.employee-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+@media screen and (max-width: 768px) {
+  .employee-details-container {
+    padding: 0 20px;
+  }
+}
+
+
+.categoryCard .ant-card-head{
+  background-color: #f0f0f0;
 }

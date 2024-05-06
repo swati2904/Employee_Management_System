@@ -183,5 +183,16 @@ INSERT INTO department_shifts (employee_id, shift_start, shift_end) VALUES
 (14, '2024-05-05 11:00:00', '2024-05-05 19:00:00'),
 (15, '2024-05-05 12:00:00', '2024-05-05 20:00:00');
 
+-- Add isAdmin column to the admin table
+ALTER TABLE admin
+ADD COLUMN isAdmin BOOLEAN NOT NULL DEFAULT false;
+
+
+-- Update isAdmin for admin users
+-- Update isAdmin for admin users using a WHERE clause with a KEY column
+UPDATE admin
+SET isAdmin = true
+WHERE id IN (1, 2, 3, 4, 5, 6);
+
 
  

@@ -22,6 +22,7 @@ const EmployeeLogin = () => {
       })
       .then((result) => {
         if (result.data.loginStatus) {
+          localStorage.setItem('employeeEmail', values.email);
           localStorage.setItem('valid', true);
           navigate('/employeedashboard');
         } else {

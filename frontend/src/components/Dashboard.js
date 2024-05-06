@@ -99,8 +99,8 @@ const Dashboard = () => {
         </ul>
       </div>
       <div className='content'>
-        <div className='header'>
-          <h2>Employee Management System</h2>
+        <div class='header'>
+          <h1>Employee Management System</h1>
         </div>
         <div className='mainContent'>
           <Outlet />
