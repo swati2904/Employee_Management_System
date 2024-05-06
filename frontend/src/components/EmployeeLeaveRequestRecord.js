@@ -14,7 +14,7 @@ const EmployeeLeaveRequestRecord = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:3001/employee/leave_requests', formData)
+      .post('http://localhost:3001/employee/leave_request', formData)
       .then((response) => {
         setSuccessMessage('Leave request submitted successfully.');
         setFormData({

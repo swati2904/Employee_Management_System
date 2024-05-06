@@ -1,3 +1,8 @@
+DROP DATABASE IF EXISTS employeemanagementsystem;
+
+-- Create a new database
+CREATE DATABASE employeemanagementsystem;
+
 use employeemanagementsystem;
 
 -- Create the admin table
@@ -23,7 +28,9 @@ CREATE TABLE employee (
     salary DECIMAL(10, 2) NOT NULL,
     image VARCHAR(255),
     category_id INT,
-    FOREIGN KEY (category_id) REFERENCES category(id)
+    admin_id INT, -- New column for admin foreign key
+    FOREIGN KEY (category_id) REFERENCES category(id),
+    FOREIGN KEY (admin_id) REFERENCES admin(id) -- New foreign key constraint
 );
 
 CREATE TABLE holidays (
@@ -38,7 +45,8 @@ CREATE TABLE leave_requests (
   start_date DATE NOT NULL,
   end_date DATE NOT NULL,
   reason VARCHAR(255),
-  status ENUM('pending', 'approved', 'rejected')
+  status ENUM('pending', 'approved', 'rejected'),
+  FOREIGN KEY (employee_id) REFERENCES employee(id) -- Foreign key constraint to employee table
 );
 
 CREATE TABLE tasks (
@@ -47,44 +55,25 @@ CREATE TABLE tasks (
   description TEXT,
   due_date DATE,
   assigned_to INT, -- Foreign key to employee table
-  status ENUM('pending', 'in_progress', 'completed')
+  status ENUM('pending', 'in_progress', 'completed'),
+  FOREIGN KEY (assigned_to) REFERENCES employee(id) -- Foreign key constraint to employee table
 );
 
 CREATE TABLE department_shifts (
   id INT AUTO_INCREMENT PRIMARY KEY,
   employee_id INT NOT NULL,
   shift_start DATETIME NOT NULL,
-  shift_end DATETIME NOT NULL
+  shift_end DATETIME NOT NULL,
+  FOREIGN KEY (employee_id) REFERENCES employee(id) -- Foreign key constraint to employee table
 );
 
--- Insert data into the admin table
 INSERT INTO admin (email, password) VALUES
-    ('admin1@example.com', 'password123'),
-    ('admin2@example.com', 'password456');
-
--- Insert data into the employee table
-INSERT INTO employee (name, email, password, address, salary, image, category_id) VALUES
-    ('Swati Saxena', 'swati@gmail.com', '123456', '1660, Kendall Dr', 90000.00, 'swati_profile.jpg', 1),
-    ('Alice Johnson', 'alice@example.com', 'password123', '123 Main St, City A', 55000.00, 'alice_profile.jpg', 1),
-    ('Bob Smith', 'bob@example.com', 'password456', '456 Elm St, City B', 60000.00, 'bob_profile.jpg', 2),
-    ('Charlie Brown', 'charlie@example.com', 'password789', '789 Oak St, City C', 65000.00, 'charlie_profile.jpg', 3),
-    ('David Lee', 'david@example.com', 'passwordabc', '321 Maple St, City D', 70000.00, 'david_profile.jpg', 4),
-    ('Emma Wilson', 'emma@example.com', 'passworddef', '654 Pine St, City E', 75000.00, 'emma_profile.jpg', 5),
-    ('Frank Miller', 'frank@example.com', 'passwordghi', '987 Cedar St, City F', 80000.00, 'frank_profile.jpg', 6),
-    ('Grace Taylor', 'grace@example.com', 'passwordjkl', '789 Willow St, City G', 85000.00, 'grace_profile.jpg', 7),
-    ('Harry Thompson', 'harry@example.com', 'passwordmno', '456 Birch St, City H', 90000.00, 'harry_profile.jpg', 8),
-    ('Ivy White', 'ivy@example.com', 'passwordpqr', '321 Cherry St, City I', 95000.00, 'ivy_profile.jpg', 9),
-    ('Jack Brown', 'jack@example.com', 'passwordstu', '123 Pineapple St, City J', 100000.00, 'jack_profile.jpg', 10),
-    ('Kate Green', 'kate@example.com', 'passwordvwx', '654 Mango St, City K', 105000.00, 'kate_profile.jpg', 11),
-    ('Liam Davis', 'liam@example.com', 'passwordyz1', '987 Banana St, City L', 110000.00, 'liam_profile.jpg', 12),
-    ('Mia Clark', 'mia@example.com', 'password234', '789 Orange St, City M', 115000.00, 'mia_profile.jpg', 13),
-    ('Noah Moore', 'noah@example.com', 'password567', '456 Lemon St, City N', 120000.00, 'noah_profile.jpg', 14),
-    ('Olivia Hill', 'olivia@example.com', 'password890', '321 Lime St, City O', 125000.00, 'olivia_profile.jpg', 15),
-    ('Peter King', 'peter@example.com', 'passwordabc1', '123 Grape St, City P', 130000.00, 'peter_profile.jpg', 16),
-    ('Quinn Young', 'quinn@example.com', 'passworddef2', '654 Apple St, City Q', 135000.00, 'quinn_profile.jpg', 17),
-    ('Ryan Harris', 'ryan@example.com', 'passwordghi3', '987 Pear St, City R', 140000.00, 'ryan_profile.jpg', 18),
-    ('Sophia Walker', 'sophia@example.com', 'passwordjkl4', '789 Watermelon St, City S', 145000.00, 'sophia_profile.jpg', 19),
-    ('Thomas Turner', 'thomas@example.com', 'passwordmno5', '456 Kiwi St, City T', 150000.00, 'thomas_profile.jpg', 20);
+('admin@gmail.com', '123456'),
+('admin1@gmail.com', '123456'),
+('admin2@gmail.com', '123456'),
+('admin3@gmail.com', '123456'),
+('admin4@gmail.com', '123456'),
+('admin5@gmail.com', '123456');
 
 -- Insert data into the category table
 INSERT INTO category (name) VALUES 
@@ -109,72 +98,90 @@ INSERT INTO category (name) VALUES
 ('Research & Development'),
 ('Legal');
 
+INSERT INTO employee (name, email, password, address, salary, image, category_id, admin_id) VALUES
+('Swati Saxena', 'swati@gmail.com', 'swati@123', '1660, kendall dr, USA', 50000.00, 'swati.jpg', 1, NULL),
+('John Doe', 'john.doe@example.com', 'johnpassword', '123 Main St, Anytown, USA', 50000.00, 'john.jpg', 1, NULL),
+('Jane Smith', 'jane.smith@example.com', 'janepassword', '456 Elm St, Othertown, USA', 60000.00, 'jane.jpg', 2, NULL),
+('Michael Johnson', 'michael.johnson@example.com', 'michaelpassword', '789 Oak St, Anothertown, USA', 55000.00, 'michael.jpg', 3, NULL),
+('Emily Brown', 'emily.brown@example.com', 'emilypassword', '101 Pine St, Somewhere, USA', 52000.00, 'emily.jpg', 4, NULL),
+('David Wilson', 'david.wilson@example.com', 'davidpassword', '246 Maple St, Anytown, USA', 48000.00, 'david.jpg', 5, NULL),
+('Sarah Taylor', 'sarah.taylor@example.com', 'sarahpassword', '369 Oak St, Othertown, USA', 52000.00, 'sarah.jpg', 6, NULL),
+('Chris Clark', 'chris.clark@example.com', 'chrispassword', '482 Pine St, Anothertown, USA', 50000.00, 'chris.jpg', 7, NULL),
+('Jessica Martinez', 'jessica.martinez@example.com', 'jessicapassword', '573 Elm St, Somewhere, USA', 51000.00, 'jessica.jpg', 8, NULL),
+('Kevin Lee', 'kevin.lee@example.com', 'kevinpassword', '688 Cedar St, Anytown, USA', 49000.00, 'kevin.jpg', 9, NULL),
+('Amanda Rodriguez', 'amanda.rodriguez@example.com', 'amandapassword', '777 Maple St, Othertown, USA', 53000.00, 'amanda.jpg', 10, NULL),
+('Mark Garcia', 'mark.garcia@example.com', 'markpassword', '894 Oak St, Anothertown, USA', 54000.00, 'mark.jpg', 11, NULL),
+('Laura Martinez', 'laura.martinez@example.com', 'laurapassword', '112 Pine St, Somewhere, USA', 57000.00, 'laura.jpg', 12, NULL),
+('Eric Johnson', 'eric.johnson@example.com', 'ericpassword', '246 Cedar St, Anytown, USA', 51000.00, 'eric.jpg', 13, NULL),
+('Anna Davis', 'anna.davis@example.com', 'annapassword', '399 Elm St, Othertown, USA', 53000.00, 'anna.jpg', 14, NULL),
+('Daniel Brown', 'daniel.brown@example.com', 'danielpassword', '582 Pine St, Anothertown, USA', 52000.00, 'daniel.jpg', 15, NULL);
+
+-- Update the admin_id for selected employees in the employee table
+UPDATE employee 
+SET admin_id = (SELECT id FROM admin ORDER BY RAND() LIMIT 1)
+WHERE id IN (1, 3, 5, 7, 9);
+
+-- Insert data into the holidays table
 INSERT INTO holidays (date, description) VALUES
 ('2024-12-25', 'Christmas Day'),
-('2025-01-01', 'New Year\'s Day'),
-('2025-07-04', 'Independence Day'),
-('2025-11-27', 'Thanksgiving Day'),
-('2025-12-25', 'Christmas Day'),
-('2026-01-01', 'New Year\'s Day'),
-('2026-07-04', 'Independence Day'),
-('2026-11-26', 'Thanksgiving Day'),
-('2026-12-25', 'Christmas Day'),
-('2027-01-01', 'New Year\'s Day');
+('2024-07-04', 'Independence Day'),
+('2024-01-01', 'New Year''s Day'),
+('2024-09-07', 'Labor Day'),
+('2024-11-11', 'Veterans Day'),
+('2024-05-28', 'Memorial Day'),
+('2024-02-14', 'Valentine''s Day'),
+('2024-10-31', 'Halloween'),
+('2024-04-22', 'Earth Day'),
+('2024-06-14', 'Flag Day');
 
+-- Insert data into the leave_requests table
 INSERT INTO leave_requests (employee_id, start_date, end_date, reason, status) VALUES
-(1, '2025-03-10', '2025-03-15', 'Vacation', 'pending'),
-(2, '2025-04-20', '2025-04-25', 'Personal Leave', 'pending'),
-(3, '2025-05-15', '2025-05-17', 'Sick Leave', 'pending'),
-(4, '2025-06-10', '2025-06-15', 'Family Emergency', 'pending'),
-(5, '2025-07-20', '2025-07-25', 'Vacation', 'pending'),
-(6, '2025-08-15', '2025-08-17', 'Personal Leave', 'pending'),
-(7, '2025-09-10', '2025-09-15', 'Sick Leave', 'pending'),
-(8, '2025-10-20', '2025-10-25', 'Vacation', 'pending'),
-(9, '2025-11-15', '2025-11-17', 'Personal Leave', 'pending'),
-(10, '2025-12-10', '2025-12-15', 'Sick Leave', 'pending');
+(1, '2024-05-10', '2024-05-12', 'Vacation', 'approved'),
+(2, '2024-06-15', '2024-06-18', 'Family event', 'pending'),
+(3, '2024-08-20', '2024-08-22', 'Sick leave', 'pending'),
+(4, '2024-07-10', '2024-07-12', 'Vacation', 'approved'),
+(5, '2024-08-15', '2024-08-17', 'Family event', 'pending'),
+(6, '2024-09-01', '2024-09-03', 'Personal reasons', 'pending'),
+(7, '2024-10-10', '2024-10-12', 'Doctor appointment', 'pending'),
+(8, '2024-11-15', '2024-11-17', 'Vacation', 'pending'),
+(9, '2024-12-20', '2024-12-24', 'Holiday travel', 'pending'),
+(10, '2024-05-05', '2024-05-07', 'Family gathering', 'approved'),
+(11, '2024-06-10', '2024-06-12', 'Sick leave', 'pending'),
+(12, '2024-08-15', '2024-08-17', 'Vacation', 'pending'),
+(13, '2024-09-10', '2024-09-12', 'Personal reasons', 'pending'),
+(14, '2024-10-20', '2024-10-22', 'Conference', 'pending'),
+(15, '2024-12-01', '2024-12-03', 'Family event', 'pending');
 
+-- Insert data into the tasks table
 INSERT INTO tasks (title, description, due_date, assigned_to, status) VALUES
-('Complete project proposal', 'Prepare a detailed project proposal document for the upcoming project.', '2025-03-20', 1, 'pending'),
-('Review code for bug fixes', 'Review and provide feedback on the recent code changes for bug fixes.', '2025-04-10', 2, 'pending'),
-('Update project documentation', 'Update project documentation with the latest changes and enhancements.', '2025-05-01', 3, 'pending'),
-('Test new feature', 'Perform testing on the newly developed feature to ensure it meets requirements.', '2025-06-15', 4, 'pending'),
-('Prepare presentation slides', 'Create slides for the upcoming project presentation to stakeholders.', '2025-07-10', 5, 'pending'),
-('Code refactoring', 'Refactor existing codebase to improve maintainability and performance.', '2025-08-01', 6, 'pending'),
-('Client meeting', 'Attend a meeting with the client to discuss project progress and updates.', '2025-09-20', 7, 'pending'),
-('User training session', 'Conduct a training session for users on how to use the new software features.', '2025-10-05', 8, 'pending'),
-('Bug triage', 'Prioritize and assign bugs reported by users to the development team for resolution.', '2025-11-15', 9, 'pending'),
-('Code review session', 'Participate in a code review session to ensure code quality and best practices.', '2025-12-01', 10, 'pending');
+('Project Alpha', 'Complete project planning phase', '2024-06-30', 1, 'in_progress'),
+('Marketing Campaign', 'Develop social media strategy', '2024-07-15', 4, 'pending'),
+('IT Support Tickets', 'Resolve outstanding support tickets', '2024-05-20', 3, 'completed'),
+('Product Launch', 'Plan and execute product launch event', '2024-08-31', 10, 'pending'),
+('Training Program', 'Develop training materials for new hires', '2024-06-15', 11, 'completed'),
+('Research Project', 'Conduct market research', '2024-09-30', 12, 'in_progress'),
+('Software Development', 'Implement new feature', '2024-07-10', 13, 'pending'),
+('Public Relations Campaign', 'Plan PR campaign', '2024-11-15', 14, 'pending'),
+('Employee Training', 'Organize training sessions', '2024-06-20', 15, 'pending'),
+('Quality Control Inspection', 'Perform quality checks', '2024-08-10', 2, 'completed');
 
+-- Insert data into the department_shifts table
 INSERT INTO department_shifts (employee_id, shift_start, shift_end) VALUES
-(1, '2025-03-10 08:00:00', '2025-03-10 16:00:00'),
-(2, '2025-03-10 12:00:00', '2025-03-10 20:00:00'),
-(3, '2025-03-10 09:00:00', '2025-03-10 17:00:00'),
-(4, '2025-03-10 08:30:00', '2025-03-10 16:30:00'),
-(5, '2025-03-10 10:00:00', '2025-03-10 18:00:00'),
-(6, '2025-03-10 11:00:00', '2025-03-10 19:00:00'),
-(7, '2025-03-10 07:00:00', '2025-03-10 15:00:00'),
-(8, '2025-03-10 08:00:00', '2025-03-10 16:00:00'),
-(9, '2025-03-10 09:30:00', '2025-03-10 17:30:00'),
-(10, '2025-03-10 08:00:00', '2025-03-10 16:00:00');
+(1, '2024-05-05 08:00:00', '2024-05-05 16:00:00'),
+(2, '2024-05-05 09:00:00', '2024-05-05 17:00:00'),
+(3, '2024-05-05 10:00:00', '2024-05-05 18:00:00'),
+(4, '2024-05-05 11:00:00', '2024-05-05 19:00:00'),
+(5, '2024-05-05 12:00:00', '2024-05-05 20:00:00'),
+(6, '2024-05-05 08:00:00', '2024-05-05 16:00:00'),
+(7, '2024-05-05 09:00:00', '2024-05-05 17:00:00'),
+(8, '2024-05-05 10:00:00', '2024-05-05 18:00:00'),
+(9, '2024-05-05 11:00:00', '2024-05-05 19:00:00'),
+(10, '2024-05-05 12:00:00', '2024-05-05 20:00:00'),
+(11, '2024-05-05 08:00:00', '2024-05-05 16:00:00'),
+(12, '2024-05-05 09:00:00', '2024-05-05 17:00:00'),
+(13, '2024-05-05 10:00:00', '2024-05-05 18:00:00'),
+(14, '2024-05-05 11:00:00', '2024-05-05 19:00:00'),
+(15, '2024-05-05 12:00:00', '2024-05-05 20:00:00');
 
-select * from employee;
 
-SET SQL_SAFE_UPDATES = 0;
-DELETE FROM your_table_name WHERE your_condition;
-
-DELETE FROM category WHERE name = 'Category 1';
-
-DELETE FROM employee WHERE category_id = (SELECT id FROM category WHERE name = 'Category 1');
-DELETE FROM category WHERE name = 'Category 1';
-
-DELETE FROM employee WHERE category_id = (SELECT id FROM category WHERE name = 'Category 2');
-DELETE FROM category WHERE name = 'Category 2';
  
-
-DELETE FROM employee WHERE category_id = (SELECT id FROM category WHERE name = 'Category 3');
-DELETE FROM category WHERE name = 'Category 3';
-
-DELETE FROM employee WHERE category_id = (SELECT id FROM category WHERE name = 'swati');
-DELETE FROM category WHERE name = 'swati';
-
-select * from category;

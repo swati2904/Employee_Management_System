@@ -7,7 +7,10 @@ import {
   UserAddOutlined,
   UnorderedListOutlined,
   LogoutOutlined,
-  UserOutlined,
+  CalendarOutlined,
+  SelectOutlined,
+  WechatWorkOutlined,
+  FieldTimeOutlined,
 } from '@ant-design/icons';
 
 const Dashboard = () => {
@@ -54,9 +57,35 @@ const Dashboard = () => {
             </Link>
           </li>
           <li>
-            <Link to='/dashboard/profile'>
-              <UserOutlined style={{ fontSize: '16px', marginRight: '10px' }} />{' '}
-              <span>Profile</span>
+            <Link to='/dashboard/view-leave-details'>
+              <SelectOutlined
+                style={{ fontSize: '16px', marginRight: '10px' }}
+              />
+              <span>Leaves</span>
+            </Link>
+          </li>
+          <li>
+            <Link to='/dashboard/holidays'>
+              <CalendarOutlined
+                style={{ fontSize: '16px', marginRight: '10px' }}
+              />
+              <span>Holidays</span>
+            </Link>
+          </li>
+          <li>
+            <Link to='/dashboard/view-tasks'>
+              <WechatWorkOutlined
+                style={{ fontSize: '16px', marginRight: '10px' }}
+              />
+              <span>Tasks</span>
+            </Link>
+          </li>
+          <li>
+            <Link to='/dashboard/view-shift'>
+              <FieldTimeOutlined
+                style={{ fontSize: '16px', marginRight: '10px' }}
+              />
+              <span>Shifts</span>
             </Link>
           </li>
           <li onClick={handleLogout}>

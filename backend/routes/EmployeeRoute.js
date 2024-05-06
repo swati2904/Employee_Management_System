@@ -23,6 +23,17 @@ router.post('/employee_login', (req, res) => {
   });
 });
 
+router.get('/employees', (req, res) => {
+  const sql = 'SELECT * FROM employee';
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error executing SQL query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    return res.json(result);
+  });
+});
+
 // Employee Detail API
 router.get('/detail/:id', (req, res) => {
   const id = req.params.id;
@@ -40,7 +51,7 @@ router.get('/detail/:id', (req, res) => {
 });
 
 // Add Holiday API
-router.post('/holidays', (req, res) => {
+router.post('/holiday', (req, res) => {
   const { date, description } = req.body;
   const sql = 'INSERT INTO holidays (date, description) VALUES (?, ?)';
 
@@ -56,7 +67,7 @@ router.post('/holidays', (req, res) => {
 });
 
 // Add Leave Request API
-router.post('/leave_requests', (req, res) => {
+router.post('/leave_request', (req, res) => {
   const { employee_id, start_date, end_date, reason } = req.body;
   const status = 'pending'; // Default status for new leave requests
   const sql =
@@ -78,7 +89,7 @@ router.post('/leave_requests', (req, res) => {
 });
 
 // Add Task API
-router.post('/tasks', (req, res) => {
+router.post('/task', (req, res) => {
   const { title, description, due_date, assigned_to } = req.body;
   const status = 'pending'; // Default status for new tasks
   const sql =
@@ -100,7 +111,7 @@ router.post('/tasks', (req, res) => {
 });
 
 // Add Department Shift API
-router.post('/department_shifts', (req, res) => {
+router.post('/department_shift', (req, res) => {
   const { employee_id, shift_start, shift_end } = req.body;
   const sql =
     'INSERT INTO department_shifts (employee_id, shift_start, shift_end) VALUES (?, ?, ?)';
@@ -113,6 +124,54 @@ router.post('/department_shifts', (req, res) => {
 
     // Return success response
     return res.json({ success: true });
+  });
+});
+
+// GET Shifts API
+router.get('/shifts', (req, res) => {
+  const sql = 'SELECT * FROM department_shifts';
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error executing SQL query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    return res.json(result);
+  });
+});
+
+// GET Holidays API
+router.get('/holidays', (req, res) => {
+  const sql = 'SELECT * FROM holidays';
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error executing SQL query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    return res.json(result);
+  });
+});
+
+// GET Tasks API
+router.get('/tasks', (req, res) => {
+  const sql = 'SELECT * FROM tasks';
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error executing SQL query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    return res.json(result);
+  });
+});
+
+// GET Leave Requests API
+router.get('/leave_requests', (req, res) => {
+  const sql = 'SELECT * FROM leave_requests';
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error executing SQL query:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    return res.json(result);
   });
 });
 

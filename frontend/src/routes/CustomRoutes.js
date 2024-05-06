@@ -6,7 +6,7 @@ import Dashboard from '../components/Dashboard';
 import Home from '../components/Home';
 import Employee from '../components/Employee';
 import Category from '../components/Category';
-import Profile from '../components/Profile';
+import Profile from '../components/viewEmployeeShift';
 import AddCategory from '../components/AddCategory';
 import AddEmployee from '../components/AddEmployee';
 import EditEmployee from '../components/EditEmployee';
@@ -19,6 +19,10 @@ import EmployeeLeaveRequestRecord from '../components/EmployeeLeaveRequestRecord
 import EmployeeShift from '../components/EmployeeShift';
 import EmployeeHolidayDetails from '../components/EmployeeHolidayDetails';
 import EmployeeTaskDetails from '../components/EmployeeTaskDetails';
+import ViewHolidays from '../components/ViewHolidays';
+import ViewEmployeeLeave from '../components/ViewEmployeeLeave';
+import ViewEmployeeTasks from '../components/ViewEmployeeTasks';
+import ViewEmployeeShifts from '../components/viewEmployeeShift';
 
 const CustomRoutes = () => {
   return (
@@ -45,6 +49,23 @@ const CustomRoutes = () => {
           path='/dashboard/edit_employee/:id'
           element={<EditEmployee />}
         ></Route>
+        <Route
+          path='/dashboard/holidays'
+          element={<EmployeeHolidayDetails />}
+        ></Route>
+
+        <Route
+          path='/dashboard/view-tasks'
+          element={<ViewEmployeeTasks />}
+        ></Route>
+        <Route
+          path='/dashboard/view-leave-details'
+          element={<ViewEmployeeLeave />}
+        ></Route>
+        <Route
+          path='/dashboard/view-shift'
+          element={<ViewEmployeeShifts />}
+        ></Route>
       </Route>
 
       {/* employee dashboard */}
@@ -56,18 +77,17 @@ const CustomRoutes = () => {
           </PrivateRoute>
         }
       >
-        <Route path='' element={<Profile />}></Route>
         <Route
           path='/employeedashboard/leave-requests'
           element={<EmployeeLeaveRequestRecord />}
         ></Route>
         <Route
-          path='/employeedashboard/shifts'
-          element={<EmployeeShift />}
+          path='/employeedashboard/view-holidays'
+          element={<ViewHolidays />}
         ></Route>
         <Route
-          path='/employeedashboard/holidays'
-          element={<EmployeeHolidayDetails />}
+          path='/employeedashboard/shifts'
+          element={<EmployeeShift />}
         ></Route>
         <Route
           path='/employeedashboard/tasks'

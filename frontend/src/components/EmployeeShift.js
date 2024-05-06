@@ -13,7 +13,7 @@ const EmployeeShift = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:3001/employee/department_shifts', formData)
+      .post('http://localhost:3001/employee/department_shift', formData)
       .then((response) => {
         setSuccessMessage('Shift added successfully.');
         setFormData({

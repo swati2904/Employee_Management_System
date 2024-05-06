@@ -54,7 +54,7 @@ const EmployeeDashboard = () => {
             </Link>
           </li>
           <li>
-            <Link to='/employeedashboard/holidays'>
+            <Link to='/employeedashboard/view-holidays'>
               <CalendarOutlined
                 style={{ fontSize: '16px', marginRight: '10px' }}
               />

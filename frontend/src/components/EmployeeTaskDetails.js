@@ -14,7 +14,7 @@ const EmployeeTaskDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:3001/employee/tasks', formData)
+      .post('http://localhost:3001/employee/task', formData)
       .then((response) => {
         setSuccessMessage('Task added successfully.');
         setFormData({

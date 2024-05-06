@@ -12,7 +12,7 @@ const EmployeeHolidayDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:3001/employee/holidays', formData)
+      .post('http://localhost:3001/employee/holiday', formData)
       .then((response) => {
         setSuccessMessage('Holiday added successfully.');
         setFormData({
