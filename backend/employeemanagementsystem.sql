@@ -194,5 +194,15 @@ UPDATE admin
 SET isAdmin = true
 WHERE id IN (1, 2, 3, 4, 5, 6);
 
+select *from admin;
+select *from category;
+select *from department_shifts;
+select *from employee;
+select *from holidays;
+select *from leave_requests;
+select *from tasks;
+
+
+
 
  
